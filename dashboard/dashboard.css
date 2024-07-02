@@ -4,6 +4,19 @@ html, body {
     background-color: rgb(24,24,24);
 }
 
+/*Fonts*/ 
+@font-face {
+    font-family: 'TeslaFont';
+    src: url("/font/TESLA.ttf") format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'TeslaFont', sans-serif;
+}
+
+
 /* Define the grid container */
 .grid-container {
     display: grid;
@@ -53,6 +66,8 @@ html, body {
     grid-area: footer;
 }
 
+/*General styling*/
+
 /*Area styling*/
 .ticker-sidebar,
 .ai-stock-recommendations,
@@ -80,6 +95,9 @@ html, body {
     background-color: #eea505;
     padding: 5px;
     margin-bottom: 5px;
+    text-align: center;
+    font-size: 0.5em;
+    font-weight: bold;
 }
 
 /*Body styling for each section*/
@@ -128,3 +146,5 @@ html, body {
 .news {
     height: 24%;
 }
+
+/*end of progress*/
