@@ -1,0 +1,130 @@
+/*Global styling*/
+html, body {
+    height: 100%;
+    background-color: rgb(24,24,24);
+}
+
+/* Define the grid container */
+.grid-container {
+    display: grid;
+    height: 100%;
+    grid-template-columns: 15% 50% 35%;
+    grid-template-rows: 0.3fr 1fr 1fr 1fr 1fr 1fr 1fr 0.6fr;
+    gap: 10px;
+    padding-right: 20px;
+    border: 5px solid rgb(255, 255, 255);
+    grid-template-areas:
+        "nav nav nav"
+        "sidebar chart info"
+        "sidebar chart info"
+        "sidebar chart info"
+        "sidebar chart info"
+        "sidebar chart info"
+        "sidebar chart info"
+        "footer footer footer";
+}
+
+/* Define the grid items */
+.nav-bar-container {
+    border: 5px solid blue;
+    grid-area: nav;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sidebar-container {
+    border: 5px solid red;
+    grid-area: sidebar;
+}
+
+.stock-chart-container {
+    border: 5px solid green;
+    grid-area: chart;
+}
+
+.stock-info-and-analysis-container {
+    border: 5px solid purple;
+    grid-area: info;
+}
+
+.footer-container {
+    border: 5px solid orange;
+    grid-area: footer;
+}
+
+/*Area styling*/
+.ticker-sidebar,
+.ai-stock-recommendations,
+.stock-chart,
+.stock-indicator,
+.stock-indicator-2,
+.stock-info,
+.ai-analysis,
+.news,
+.footer-content {
+    padding: 10px;
+    background-color: #02c0ff;
+    margin: 5px 0;
+}
+
+/*Header styling for each section*/
+.ticker-sidebar-header,
+.ai-stock-recommendations-header,
+.stock-chart-header,
+.stock-indicator-header,
+.stock-indicator-2-header,
+.stock-info-header,
+.ai-analysis-header,
+.news-header {
+    background-color: #eea505;
+    padding: 5px;
+    margin-bottom: 5px;
+}
+
+/*Body styling for each section*/
+.ticker-sidebar-body,
+.ai-stock-recommendations-body,
+.stock-chart-body,
+.stock-indicator-body,
+.stock-indicator-2-body,
+.stock-info-body,
+.ai-analysis-body,
+.news-body {
+    background-color: #c63232;
+    padding: 5px;
+}
+
+/*Area styling for each container*/
+
+.ticker-sidebar {
+    height: 50%;
+}
+
+.ai-stock-recommendations {
+    height: 46%;
+}
+
+.stock-chart {
+    height: 60%;
+}
+
+.stock-indicator {
+    height: 17%;
+}
+
+.stock-indicator-2 {
+    height: 17%;
+}
+
+.stock-info {
+    height: 40%;
+}
+
+.ai-analysis {
+    height: 30%;
+}
+
+.news {
+    height: 24%;
+}
