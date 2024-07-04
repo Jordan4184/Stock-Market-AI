@@ -35,7 +35,7 @@ const stockSymbol = 'TSLA'; //Test call of symbol for fetchStockData to use
 function getPreviousBusinessDay(date) {
     const day = new Date(date);
     let offset;
-    if(date.getDay() === 0) { //Sunday
+    if(day.getDay() === 0) { //Sunday
         offset = 2;
     } else if (day.getDay() === 1) { //Monday
         offset = 3;
@@ -54,17 +54,27 @@ function displayStockData(data) { //Defines stock data function and extracts dat
 
     //Extract relevant data from data object
     const timeSeries = data['Time Series (Daily)']; //Accesses the Time SEries (daily) object from fetched data
-    const latestDate = Object.keys(timeSeries)[0]; //Extract the latest data possible, returns array of dates(keys) in the time series object. [0] gets first date
-    const latestData = timeSeries[latestDate]; //Use the latest date key to get stock data from time series object
-    const closePrice = latestData['4. close']; //Extracts the closing price at the latest date. Data contains (open, high, low, close, volume) fields, using close index 4
 
     //Fetch date and yesterday's date
     const today = new Date().toISOString().split('T')[0]; //Need to split at T and index at 0 because ISO String outputs date and time denoted T seperaing the values
     const yesterday = getPreviousBusinessDay(today); //Uses custom function above to find yesterdays date
 
-    //Check if todays data is availible, if not use yesterday's data
+     //Check if todays data is availible, if not use yesterday's data
+    let latestDate;
+    let latestData;
+    if (timeSeries[today] && timeSeries[today]['4. close']) {
+        latestDate = today;
+        latestData = timeSeries[today];
+    } else if (timeSeries[yesterday] && timeSeries[yesterday]['4. close']) {
+        latestDate = yesterday;
+        latestData = timeSeries[yesterday];
+    } else {
+        // Fallback to the most recent date available in the time series
+        latestDate = Object.keys(timeSeries)[0];
+        latestData = timeSeries[latestDate];
+    }
 
-
+    const closePrice = latestData['4. close']; //Extracts the closing price at the latest date. Data contains (open, high, low, close, volume) fields, using close index 4
 
     //Fetches specified data 
     document.getElementById('stock-symbol').textContent = stockSymbol; //Finds ID and replaces txt. Updates HTML elements with ID's 'stock-symbol' etc...
