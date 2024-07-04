@@ -43,7 +43,7 @@ function getPreviousBusinessDay(date) {
         offset = 1;
     }
     day.setDate(day.getDate() - offset);
-    return date.toISOString().split('T')[0]; //Returns dat in YYYY-MM-DD format
+    return day.toISOString().split('T')[0]; //Returns dat in YYYY-MM-DD format
 }
 
 function displayStockData(data) { //Defines stock data function and extracts data
