@@ -1,4 +1,4 @@
-//Import newsAPI.io or newsAPI.org for news data
+//Import newsAPI.org for news data
 
 //Chart.js for Data Visualization
 //const chart = require('chart.js');
@@ -11,7 +11,7 @@ const baseUrl = 'https://www.alphavantage.co/query'; // console.log(baseUrl); Us
 
 // Utility Functions: Write reusable utility functions for fetching data and handling errors.
 async function fetchStockData (symbol) { //async used so that page does not have to constantly refresh to update values
-    const url = `${baseUrl}?function=TIME_SERIES_DAILY&symbol=${symbol}&apikey=${AV_apiKey})`; //directs to endpoint and defines time series and symbol input 
+    const url = `${baseUrl}?function=TIME_SERIES_DAILY&symbol=${symbol}&apikey=${AV_apiKey}`; //directs to endpoint and defines time series and symbol input 
 
     try { //used for error handling, if try fails, catch is ran
         
@@ -29,8 +29,6 @@ async function fetchStockData (symbol) { //async used so that page does not have
     }
 };
 
-const stockSymbol = 'TSLA'; //Test call of symbol for fetchStockData to use
-
 //Custom Function to get previous business day
 function getPreviousBusinessDay(date) {
     const day = new Date(date);
@@ -46,7 +44,7 @@ function getPreviousBusinessDay(date) {
     return day.toISOString().split('T')[0]; //Returns dat in YYYY-MM-DD format
 }
 
-function displayStockData(data) { //Defines stock data function and extracts data
+function displayStockData(data, symbol) { //Defines stock data function and extracts data
     if(!data) {
         console.log('No data availible'); //Error handling
         return;
@@ -77,15 +75,17 @@ function displayStockData(data) { //Defines stock data function and extracts dat
     const closePrice = latestData['4. close']; //Extracts the closing price at the latest date. Data contains (open, high, low, close, volume) fields, using close index 4
 
     //Fetches specified data 
-    document.getElementById('stock-symbol').textContent = stockSymbol; //Finds ID and replaces txt. Updates HTML elements with ID's 'stock-symbol' etc...
+    document.getElementById('stock-symbol').textContent = symbol; //Finds ID and replaces txt. Updates HTML elements with ID's 'stock-symbol' etc...
     document.getElementById('stock-price').textContent = `Stock Price: ${closePrice}`;
     document.getElementById('stock-date').textContent = `Date: ${latestDate}`;
 }
 
-fetchStockData(stockSymbol) //calls the ticker symbol and has additional error handling if incorrectly run
+function searchStock() {
+    const symbol = document.getElementById('stock-search').value.toUpperCase();
+fetchStockData(symbol) //calls the ticker symbol and has additional error handling if incorrectly run
     .then(data => {
         if (data) {
-            displayStockData(data);
+            displayStockData(data, symbol);
         } else {
             console.error('Failed to fetch stock data');
             document.getElementById('stock-symbol').textContent = 'Error fetching stock data';
@@ -95,7 +95,30 @@ fetchStockData(stockSymbol) //calls the ticker symbol and has additional error h
         console.error('Error fetching stock data:', error);
         document.getElementById('stock-symbol').textContent = 'Error fetching stock data';
     });
+}
 
+const updateInterval = 24 * 60 * 60 * 1000; // Update once a day
+
+function startPeriodicUpdates(symbol) {
+    setInterval(() => {
+        fetchStockData(symbol)
+            .then(data => {
+                if (data) {
+                    displayStockData(data, symbol);
+                } else {
+                    console.error('Failed to fetch stock data');
+                    document.getElementById('stock-symbol').textContent = 'Error fetching stock data';
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching stock data:', error);
+                document.getElementById('stock-symbol').textContent = 'Error fetching stock data';
+            });
+    }, updateInterval);
+}
+
+// Initial call to start periodic updates with a default stock symbol, if needed
+// startPeriodicUpdates('TSLA');
 
 
 //Next Steps:
