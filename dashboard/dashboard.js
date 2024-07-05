@@ -97,7 +97,7 @@ fetchStockData(symbol) //calls the ticker symbol and has additional error handli
     });
 }
 
-const updateInterval = 24 * 60 * 60 * 1000; // Update once a day
+const updateInterval = 24 * 60 * 60 * 1000; // Update once a day due to free API limitations
 
 function startPeriodicUpdates(symbol) {
     setInterval(() => {
@@ -117,13 +117,18 @@ function startPeriodicUpdates(symbol) {
     }, updateInterval);
 }
 
-// Initial call to start periodic updates with a default stock symbol, if needed
-// startPeriodicUpdates('TSLA');
-
-
 //Next Steps:
 
 // API Integration: Implement functions to interact with stock and news APIs.
-// Data Processing and Display: Write functions to update the DOM with the fetched data.
-// Real-time Updates: Implement periodic updates for stock data.
-// Event Handlers and Initialization: Set up event handlers and initialize the application when the document is ready
+// Data Visualization: Use Chart.js to visualize stock data.
+// User Interface: Design a user interface to display stock data and news.
+// User Experience: Implement user interactions to search for stocks and read news.
+// Deployment: Deploy the dashboard to a live server.
+// Testing: Test the dashboard to ensure it works as expected.
+// Documentation: Write documentation to explain the dashboard and its features.
+//Set up AI integration for stock data and news API
+//Set up sentement analysis for news data and stock data
+//Set up stock recommendations using AI parsing market data
+//Setup stock indicators such as RSI, MACD, etc.
+//Style the dashboard using CSS
+//Set up alerts system for stock price changes
