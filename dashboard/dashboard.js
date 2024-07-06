@@ -129,6 +129,6 @@ function startPeriodicUpdates(symbol) {
 //Set up AI integration for stock data and news API
 //Set up sentement analysis for news data and stock data
 //Set up stock recommendations using AI parsing market data
-//Setup stock indicators such as RSI, MACD, etc.
+//Setup stock indicators such as RSI, MACD, fibonacci potentially
 //Style the dashboard using CSS
 //Set up alerts system for stock price changes
